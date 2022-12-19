@@ -45,7 +45,7 @@ export default async  function handler( req, res) {
         feed.items.forEach((item) => {
 
 
-          var urlparts:[] = item.link?.split("?");
+          var urlparts = item.link?.split("?");
 
           setData.push({
             title: item.title,
