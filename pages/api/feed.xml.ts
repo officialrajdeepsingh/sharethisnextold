@@ -1,9 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-type Data = {
-  name: string
-}
+
 import Parser from 'rss-parser';
 import { format } from 'date-fns';
 import Nodeparser from 'node-html-parser';
@@ -24,8 +22,8 @@ let parser = new Parser(
 
 
 export default async  function handler( req: NextApiRequest, res: NextApiResponse<Data>) {
-  let setData:string[] = [];
-  let todayArticle:string[] = [];
+  let setData:object[] = [];
+  let todayArticle:object[] = [];
 
   function htmlImage(params:string) {
 
@@ -49,7 +47,7 @@ export default async  function handler( req: NextApiRequest, res: NextApiRespons
         feed.items.forEach((item) => {
 
 
-          var urlparts = item.link.split("?");
+          var urlparts:[] = item.link?.split("?");
 
           setData.push({
             title: item.title,
