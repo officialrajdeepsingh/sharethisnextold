@@ -74,7 +74,7 @@ export default async  function handler( req, res) {
       const articleDataFormat = format(new Date(setData[index].date), "yyyy-MM-dd");
 
 
-      if (todayFormat !== articleDataFormat) {
+      if (todayFormat === articleDataFormat) {
         todayArticle.push(setData[index])
       }
 
