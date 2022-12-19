@@ -24,19 +24,19 @@ let parser = new Parser(
 
 
 export default async  function handler( req: NextApiRequest, res: NextApiResponse<Data>) {
-  let setData = [];
-  let todayArticle = [];
+  let setData:string[] = [];
+  let todayArticle:string[] = [];
 
-  function htmlImage(params) {
+  function htmlImage(params:string) {
 
-    let img = Nodeparser.parse(params).querySelector('img').getAttribute('src')
+    let img = Nodeparser.parse(params).querySelector('img')?.getAttribute('src')
 
     return img;
   }
 
-  function description(params) {
+  function description(params:string) {
 
-    let text = Nodeparser.parse(params).querySelector('p').innerText
+    let text = Nodeparser.parse(params).querySelector('p')?.innerText
 
     return text;
   }
