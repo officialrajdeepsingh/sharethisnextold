@@ -21,7 +21,7 @@ let parser = new Parser(
 
 
 
-export default async  function handler( req: NextApiRequest, res: NextApiResponse<Data>) {
+export default async  function handler( req: NextApiRequest, res: NextApiResponse) {
   let setData:object[] = [];
   let todayArticle:object[] = [];
 
