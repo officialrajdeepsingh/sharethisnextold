@@ -3,8 +3,8 @@
 import Parser from 'rss-parser';
 import { format } from 'date-fns';
 import Nodeparser from 'node-html-parser';
+import medium from '../../feed/medium.json';
 
-const result = ["https://medium.com/feed/frontendweb", "https://medium.com/feed/nextjs"]
 
 
 
@@ -37,8 +37,8 @@ export default async  function handler( req, res) {
     return text;
   }
 
-  for (let index = 0; index < result.length; index++) {
-    const url = result[index]
+  for (let index = 0; index < medium.length; index++) {
+    const url = medium[index]
     let feed = await parser.parseURL(url)
       .then((feed) => {
 
@@ -85,8 +85,7 @@ export default async  function handler( req, res) {
   let  baseUrl= '/'
 
 
-  // res.status(200).json({ articles: todayArticle })
-
+console.log(todayArticle.length);
   const item = todayArticle.map(
     (data) => `<item>
       <title> ${data.title}</title>
