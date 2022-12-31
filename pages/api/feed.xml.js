@@ -50,6 +50,8 @@ export default async  function handler( req, res) {
 
          let convertIntoHashTags= item.categories.map(item=> `#${item}`)
 
+
+
           setData.push({
             title: item.title,
             link: urlparts[0],
@@ -58,7 +60,8 @@ export default async  function handler( req, res) {
             description: description(item.content),
             author: item.creator,
             categories: item.categories,
-            hashTags:convertIntoHashTags,
+            hashTags: convertIntoHashTags.join().replaceAll("," ," ")
+            ,
             guid: item.guid
           });
         });
