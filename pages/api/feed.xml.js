@@ -47,6 +47,9 @@ export default async  function handler( req, res) {
 
           var urlparts = item.link?.split("?");
 
+
+         let convertIntoHashTags= item.categories.map(item=> `#${item}`)
+
           setData.push({
             title: item.title,
             link: urlparts[0],
@@ -55,6 +58,7 @@ export default async  function handler( req, res) {
             description: description(item.content),
             author: item.creator,
             categories: item.categories,
+            hashTags:convertIntoHashTags,
             guid: item.guid
           });
         });
@@ -85,7 +89,6 @@ export default async  function handler( req, res) {
   let  baseUrl= '/'
 
 
-console.log(todayArticle.length);
   const item = todayArticle.map(
     (data) => `<item>
       <title> ${data.title}</title>
@@ -94,6 +97,7 @@ console.log(todayArticle.length);
       <image> ${data.image}</image>
       <guid isPermaLink="false">${data.guid}</guid>
       <categories>${data.categories}</categories>
+      <hashtags>${data.hashTags}</hashtags>
       <author>${data.author}</author>
       <date>${data.date}</date>
     </item>`
