@@ -60,8 +60,7 @@ export default async  function handler( req, res) {
             description: description(item.content),
             author: item.creator,
             categories: item.categories,
-            hashTags: convertIntoHashTags.join().replaceAll("," ," ")
-            ,
+            hashTags: convertIntoHashTags.join().replaceAll("," ," "),
             guid: item.guid
           });
         });
@@ -93,17 +92,20 @@ export default async  function handler( req, res) {
 
 
   const item = todayArticle.map(
+
     (data) => `<item>
-      <title> ${data.title}</title>
-      <description> ${data.description}</description>
-      <link> ${data.link} </link>
-      <image> ${data.image}</image>
-      <guid isPermaLink="false">${data.guid}</guid>
-      <categories>${data.categories}</categories>
-      <hashtags>${data.hashTags}</hashtags>
-      <author>${data.author}</author>
+    <title><![CDATA[${data.title}]]> </title>
+      <description> <![CDATA[ ${data.description} ]]> </description>
+      <link> <![CDATA[ ${data.link} ]]> </link>
+      <image> <![CDATA[ ${data.image} ]]></image>
+      <guid> <![CDATA[ ${data.guid} ]]></guid>
+      <categories> <![CDATA[${data.categories} ]]></categories>
+      <hashtags> <![CDATA[${data.hashTags} ]]></hashtags>
+      <author> <![CDATA[${data.author} ]]></author>
       <date>${data.date}</date>
     </item>`
+
+
   )
     .join('')
 
