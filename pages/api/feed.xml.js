@@ -19,9 +19,9 @@ let parser = new Parser(
 
 
 
-export default async  function handler( req, res) {
-  let setData  = [];
-  let todayArticle  = [];
+export default async function handler(req, res) {
+  let setData = [];
+  let todayArticle = [];
 
   function htmlImage(params) {
 
@@ -48,7 +48,7 @@ export default async  function handler( req, res) {
           var urlparts = item.link?.split("?");
 
 
-         let convertIntoHashTags= item.categories.map(item=> `#${item}`)
+          let convertIntoHashTags = item.categories.map(item => `#${item}`)
 
 
 
@@ -60,7 +60,7 @@ export default async  function handler( req, res) {
             description: description(item.content),
             author: item.creator,
             categories: item.categories,
-            hashTags: convertIntoHashTags.join().replaceAll("," ," "),
+            hashTags: convertIntoHashTags.join().replaceAll(",", " "),
             guid: item.guid
           });
         });
@@ -89,7 +89,6 @@ export default async  function handler( req, res) {
   }
 
   let  baseUrl= '/'
-
 
   const item = todayArticle.map(
 
