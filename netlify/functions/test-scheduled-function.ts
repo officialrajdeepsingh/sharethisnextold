@@ -5,7 +5,7 @@ const myHandler: Handler = async (event: HandlerEvent, context: HandlerContext) 
 
   console.log("Received event:", event);
 
- await axios.get("https://bejewelled-chaja-481373.netlify.app/api/linkedin")
+ await axios.get("https://linkedin-share.netlify.app/api/linkedin")
 
     return {
         statusCode: 200,
