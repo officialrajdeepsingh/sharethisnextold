@@ -19,13 +19,23 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
+        
         <div className={styles.description}>
+
           <Link href="/api/feed.xml">
-          <p>
-           Open your xml API
-            <code className={styles.code}>click here.</code>
-          </p>
+            <p>
+                 Open your xml API 
+              <code className={styles.code}> click here.</code>
+            </p>
           </Link>
+
+          <Link href="/api/linkedin">
+            <p>
+                 Open your linkedin API 
+              <code className={styles.code}> click here.</code>
+            </p>
+          </Link>
+
           <div>
             <a
               href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
@@ -43,6 +53,8 @@ export default function Home() {
               />
             </a>
           </div>
+
+
         </div>
 
         <div className={styles.center}>
