@@ -4,93 +4,23 @@ import Parser from 'rss-parser';
 import { format } from 'date-fns';
 import Nodeparser from 'node-html-parser';
 import medium from '../../feed/medium.json';
-import axios from "axios";
 
+// import axios from "axios";
 
+// import { supabase } from '../../supabase';
 
+import  { shareOnLinkedin, shareSupabase} from '../../utility/utility';
 
-let parser = new Parser(
-  {
+let parser = new Parser({
     customFields: {
       item: [["content:encoded", "content"], ["dc:creator", "creator"]]
     }
-  }
-);
-
-
-
-async function shareOnLinkedin(todayArticle) {
-    
-    let headersList = {
-      "Authorization": process.env.LINKEDIN_ACCESS_TOKEN,
-      "Content-Type": "application/json"
-    }
-    
-     await todayArticle.map(
-        post => {
-    
-          let bodyContent = JSON.stringify({
-            "content": {
-              "contentEntities": [
-                {
-                  "entityLocation": post.link,
-                  "thumbnails": [
-                    {
-                      "resolvedUrl": post.image
-                    }
-                  ]
-                }
-              ],
-              "title": post.title,
-              "description": post.description ? post.description : ""
-            },
-            "distribution": {
-              "linkedInDistributionTarget": {}
-            },
-            "owner": "urn:li:organization:76615898",
-            "subject": post.description ? post.description : post.title,
-            "text": {
-              "text": `${post.title} 
-              
-              ${post.description}
-
-               Publish By ${post.author}
-
-               ${post.hashTags}
-              `
-            }
-          });
-    
-          let reqOptions = {
-            url: "https://api.linkedin.com/v2/shares",
-            method: "POST",
-            headers: headersList,
-            data: bodyContent,
-          }
-    
-    
-         axios.request(reqOptions)
-            .then(function (response) {
-              console.log(response.data);
-            })
-            .catch(function error(error) {
-              console.log(error);
-
-            }
-    
-            )
-    
-    
-        }
-      )
-}
-
-
-
-
+});
 
 export default async function handler(req, res) {
+  
   let setData = [];
+
   let todayArticle = [];
 
   function htmlImage(params) {
@@ -131,13 +61,13 @@ export default async function handler(req, res) {
             hashTags: convertIntoHashTags.join().replaceAll(",", " "),
             guid: item.guid
           });
+
+
         });
 
       });
 
   }
-
-
 
   if (setData) {
 
@@ -156,15 +86,18 @@ export default async function handler(req, res) {
 
   }
 
-
   shareOnLinkedin(todayArticle)
 
+  for (let index = 0; index < todayArticle.length; index++) {
+    shareSupabase(todayArticle[index])
+  }
 
   res
-  .setHeader('Content-Type', 'text/plain')
-  .setHeader(
-    'Cache-Control',
-    'public, s-maxage=100, stale-while-revalidate=590'
-  )
-  .status(200)
-  .send("every thing fine")}
+    .setHeader('Content-Type', 'text/plain')
+    .setHeader(
+      'Cache-Control',
+      'public, s-maxage=900, stale-while-revalidate=590'
+    )
+    .status(200)
+    .send("every thing fine is here ")
+}
