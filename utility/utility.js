@@ -6,10 +6,15 @@ async function supabaseAnalytic(item) {
   await supabase
   .from('analytic')
   .upsert(
-    {
-      title: item.content.title,
-      isPublish: true,
-    }, { onConflict: "title", ignoreDuplicates: false })
+      {
+        title: item.content.title,
+        isPublish: true,
+      }, 
+      {
+        onConflict: "title", 
+        ignoreDuplicates: false
+      }
+    )
   .select()
   
 }
@@ -19,10 +24,18 @@ async function publishSupabaseItem(item) {
   await supabase
     .from('publish')
     .upsert(
-      {
-        title: item.content.title,
-        isPublish: true,
-      }, { onConflict: "title", ignoreDuplicates: false })
+
+        {
+          title: item.content.title,
+          isPublish: true,
+        }, 
+
+        { 
+          onConflict: "title", 
+          ignoreDuplicates: false 
+        }
+
+      )
     .select()
 }
 
@@ -97,7 +110,7 @@ async function shareOnLinkedin(todayArticle) {
              await publishSupabaseItem(response.data)
 
           }
-        
+
         )
         .catch(
           function error(error) {
@@ -112,19 +125,27 @@ async function shareSupabase(item) {
 
   try {
 
-    const { error, data } = await supabase
+      await supabase
       .from('list')
-      .upsert({
-        title: item.title,
-        description: item.description,
-        link: item.link,
-        image: item.image,
-        guid: item.guid,
-        categories: item.categories,
-        hashTags: item.hashTags,
-        author: item.author,
-        date: item.date
-      }, { onConflict: "guid", ignoreDuplicates: false })
+      .upsert(
+        {
+
+          title: item.title,
+          description: item.description,
+          link: item.link,
+          image: item.image,
+          guid: item.guid,
+          categories: item.categories,
+          hashTags: item.hashTags,
+          author: item.author,
+          date: item.date
+
+        }, 
+        {
+          onConflict: "guid",
+          ignoreDuplicates: false
+        }
+      )
       .select()
 
   } catch (error) {
