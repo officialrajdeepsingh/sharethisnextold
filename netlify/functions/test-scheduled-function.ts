@@ -1,4 +1,5 @@
 import { Handler, HandlerEvent, HandlerContext, schedule } from "@netlify/functions";
+
 import axios from "axios";
 
 const myHandler: Handler = async (event: HandlerEvent, context: HandlerContext) => {
@@ -12,6 +13,6 @@ const myHandler: Handler = async (event: HandlerEvent, context: HandlerContext) 
     };
 };
 
-const handler = schedule("@hourly", myHandler)
+const handler = schedule("@daily", myHandler)
 
 export { handler };
