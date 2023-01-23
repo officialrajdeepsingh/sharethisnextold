@@ -1,2 +1,2 @@
-[functions."test-function"]
+[functions."handler"]
 schedule = "@hourly"
