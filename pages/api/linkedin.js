@@ -1,14 +1,7 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
 import Parser from 'rss-parser';
 import { format } from 'date-fns';
 import Nodeparser from 'node-html-parser';
 import medium from '../../feed/medium.json';
-
-// import axios from "axios";
-
-// import { supabase } from '../../supabase';
-
 import  { shareOnLinkedin, shareSupabase} from '../../utility/utility';
 
 let parser = new Parser({
@@ -47,8 +40,7 @@ export default async function handler(req, res) {
 
           var urlparts = item.link?.split("?");
 
-
-          let convertIntoHashTags = item.categories.map(item => `#${item}`)
+          let convertIntoHashTags = item.categories?.map(item => `#${item}`)
 
           setData.push({
             title: item.title,
@@ -58,10 +50,9 @@ export default async function handler(req, res) {
             description: description(item.content),
             author: item.creator,
             categories: item.categories,
-            hashTags: convertIntoHashTags.join().replaceAll(",", " "),
+            hashTags: convertIntoHashTags? convertIntoHashTags.join().replaceAll(",", " "): null,
             guid: item.guid
           });
-
 
         });
 
@@ -76,7 +67,6 @@ export default async function handler(req, res) {
       const todayFormat = format(new Date(), "yyyy-MM-dd");
 
       const articleDataFormat = format(new Date(setData[index].date), "yyyy-MM-dd");
-
 
       if (todayFormat === articleDataFormat) {
         todayArticle.push(setData[index])
