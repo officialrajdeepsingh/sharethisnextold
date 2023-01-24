@@ -47,6 +47,7 @@ async function deleteLinkedinItem(id) {
     .eq('guid', id)
 }
 
+
 async function shareOnLinkedin(todayArticle) {
 
 
@@ -103,6 +104,8 @@ async function shareOnLinkedin(todayArticle) {
       axios.request(reqOptions)
         .then( async function (response) {
 
+            console.log(response.json(),' response json() is here ');
+
              await supabaseAnalytic(response.data)
 
              await deleteLinkedinItem(post.guid)
@@ -114,7 +117,7 @@ async function shareOnLinkedin(todayArticle) {
         )
         .catch(
           function error(error) {
-            console.log(error);
+              console.log(error);
           }
       )
     }
