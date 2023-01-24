@@ -83,13 +83,12 @@ async function shareOnLinkedin(todayArticle) {
         "text": {
                
               "text": ` ${post.title} 
-                    
-                        ${post.description }
-          
-                        Publish By ${post.author}
-          
-                        ${post.hashTags}
 
+                        ${post.description }
+
+                        Publish By ${post.author}
+
+                        ${post.hashTags}
                       `
           }
       });
