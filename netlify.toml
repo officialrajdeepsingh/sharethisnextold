@@ -1,2 +1,2 @@
-[functions."handler"]
+[functions."scheduled-function"]
 schedule = "@hourly"
