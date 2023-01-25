@@ -22,7 +22,7 @@ module.exports.handler = async () => {
       )
 
     } catch (error) {
-      console.log(error);
+      console.log('error is here');
     }
 
   };
