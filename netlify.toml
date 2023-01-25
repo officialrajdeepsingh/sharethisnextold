@@ -1,2 +1,2 @@
-[functions."scheduled-function"]
-schedule = "@hourly"
+[functions]
+  directory = "scheduled-function"
