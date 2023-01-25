@@ -1,4 +1,3 @@
-const { schedule } = require('@netlify/functions')
 const axios = require('axios');
 
 // To learn about scheduled functions and supported cron extensions,
