@@ -15,6 +15,7 @@ specifiers:
   eslint-config-next: 13.0.7
   next: 13.0.7
   node-html-parser: ^6.1.4
+  proxy-from-env: ^1.1.0
   react: 18.2.0
   react-dom: 18.2.0
   rss-parser: ^3.12.0
@@ -35,6 +36,7 @@ dependencies:
   eslint-config-next: 13.0.7_lzzuuodtsqwxnvqeq4g4likcqa
   next: 13.0.7_biqbaboplfbrettd7655fr4n2y
   node-html-parser: 6.1.4
+  proxy-from-env: 1.1.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   rss-parser: 3.12.0
