@@ -82,14 +82,20 @@ async function shareOnLinkedin(todayArticle) {
         "subject": post.description ? post.description : post.title,
         "text": {
                
-              "text": ` ${post.title} 
+              "text": post.description? ` ${post.title} 
 
                         ${post.description }
 
                         Publish By ${post.author}
 
                         ${post.hashTags}
-                      `
+                      `: ` 
+                      ${post.title}
+
+                      Publish By ${post.author}
+
+                      ${post.hashTags}
+                    `
           }
       });
 
