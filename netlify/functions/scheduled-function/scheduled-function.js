@@ -7,16 +7,15 @@ const axios = require('axios');
 
 module.exports.handler = async () => {
 
-  console.log('function triger');
 
     try {
 
       await axios.get("https://linkedin-share.netlify.app/api/linkedin").then(
         () => {
-          console.log('axios triger');
+          console.log('Successful publish new article.');
           return {
             statusCode: 200,
-            body: JSON.stringify( { message : " Hello World " } ),
+            body: JSON.stringify( { message : "Successful" } ),
           }
         }
       )
