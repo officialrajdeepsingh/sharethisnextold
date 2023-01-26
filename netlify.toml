@@ -4,4 +4,4 @@
 
 
 [functions."scheduled-function"]
-schedule = "@hourly"
+schedule = "8 * * * *"
