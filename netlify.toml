@@ -4,4 +4,4 @@
 
 
 [functions."scheduled-function"]
-schedule = "8 * * * *"
+schedule = "0 8 * * *"
