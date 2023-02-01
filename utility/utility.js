@@ -82,19 +82,18 @@ async function shareOnLinkedin(todayArticle) {
         "subject": post.description ? post.description : post.title,
         "text": {
                
-              "text": post.description? ` ${post.title} 
+              "text": post.description? `${post.title} 
 
-                        ${post.description }
+${post.description }
 
-                        Publish By ${post.author}
+Publish By ${post.author}
 
-                        ${post.hashTags}
-                      `: ` 
-                      ${post.title}
+${post.hashTags}
+                      `: `${post.title}
 
-                      Publish By ${post.author}
+Publish By ${post.author}
 
-                      ${post.hashTags}
+${post.hashTags}
                     `
           }
       });
@@ -102,7 +101,7 @@ async function shareOnLinkedin(todayArticle) {
       let reqOptions = {
         url: "https://api.linkedin.com/v2/shares",
         method: "POST",
-        headers: headersList,
+        headers: SuSuSuSu,
         data: bodyContent,
       }
 
