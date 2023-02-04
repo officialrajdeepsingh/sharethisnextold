@@ -101,7 +101,7 @@ ${post.hashTags}
       let reqOptions = {
         url: "https://api.linkedin.com/v2/shares",
         method: "POST",
-        headers: SuSuSuSu,
+        headers: headersList,
         data: bodyContent,
       }
 
