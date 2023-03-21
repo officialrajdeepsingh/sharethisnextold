@@ -3,15 +3,14 @@ import { format } from 'date-fns';
 import Nodeparser from 'node-html-parser';
 import medium from '../../feed/medium.json';
 
-
 let parser = new Parser({
-    customFields: {
-      item: [["content:encoded", "content"], ["dc:creator", "creator"]]
-    }
+  customFields: {
+    item: [["content:encoded", "content"], ["dc:creator", "creator"]]
+  }
 });
 
 
-export default async function handler(req, res) {
+export default async function handler(_, res) {
 
   let setData = [];
 
@@ -32,32 +31,41 @@ export default async function handler(req, res) {
   }
 
   for (let index = 0; index < medium.length; index++) {
+
     const url = medium[index]
-    let feed = await parser.parseURL(url)
-      .then((feed) => {
 
-        feed.items.forEach((item) => {
+    try {
 
+      await parser.parseURL(url)
+        .then(
+          (feed) => {
 
-          var urlparts = item.link?.split("?");
+            feed.items.forEach((item) => {
 
+              var urlparts = item.link?.split("?");
 
-          let convertIntoHashTags = item.categories.map(item => `#${item}`)
+              let convertIntoHashTags = item.categories.map(item => `#${item}`)
 
-          setData.push({
-            title: item.title,
-            link: urlparts[0],
-            image: htmlImage(item.content),
-            date: item.pubDate,
-            description: description(item.content),
-            author: item.creator,
-            categories: item.categories,
-            hashTags: convertIntoHashTags.join().replaceAll(",", " "),
-            guid: item.guid
-          });
-        });
+              setData.push({
+                title: item.title,
+                link: urlparts[0],
+                image: htmlImage(item.content),
+                date: item.pubDate,
+                description: description(item.content),
+                author: item.creator,
+                categories: item.categories,
+                hashTags: convertIntoHashTags.join().replaceAll(",", " "),
+                guid: item.guid
+              });
 
-      });
+            });
+          }
+        );
+    } catch (error) {
+
+      console.log(error.length)
+
+    }
 
   }
 
@@ -68,7 +76,6 @@ export default async function handler(req, res) {
       const todayFormat = format(new Date(), "yyyy-MM-dd");
 
       const articleDataFormat = format(new Date(setData[index].date), "yyyy-MM-dd");
-
 
       if (todayFormat === articleDataFormat) {
 
@@ -84,7 +91,7 @@ export default async function handler(req, res) {
 
   let baseUrl = '/'
 
-  const item = todayArticle.map( (data) => `<item>
+  const item = todayArticle.map((data) => `<item>
     <title><![CDATA[${data.title}]]> </title>
       <description> <![CDATA[ ${data.description} ]]> </description>
       <link> <![CDATA[ ${data.link} ]]> </link>
